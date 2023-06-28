@@ -1,4 +1,4 @@
-### Curved Designer 1.2
+### Vector Curve Designer 1.2
 [FEATURES] 
  - Add a magnifier
  - [Space]  Enable/Disable the red 4 circles (for a better view)
