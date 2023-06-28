@@ -59,6 +59,7 @@ Declare InitializeCanvas()
 Declare UndoHandler()
 Declare RedoHandler()
 Declare ClearHandler()
+Declare     UpdateMagnefier()
 
 CompilerIf #PB_Compiler_OS = #PB_OS_Windows
   
@@ -111,6 +112,10 @@ Global.i moveinprogress,curveactive,newcurve,on1,on2,on3,on4,zoomlevel=0
 Global.b modusMagnifier
 Global.i sizeCirle =4
 Global.i Event
+
+; cursor pos
+Global.i cursorx,cursory
+
 ; Fonts
 Define.i output_font
 
@@ -286,14 +291,14 @@ Repeat
         Select  EventMenu()
           Case 1
             If sizeCirle = 4
-              sizeCirle=1;
+              sizeCirle=0;
             Else 
               sizeCirle=4;
             EndIf
-            RedrawCurves()
         EndSelect    
     EndSelect
-    
+    UpdateMagnefier()
+    RedrawCurves()
   Else  
     Delay(1)  ; No event, let the others apps get some CPU time too ! 
   EndIf 
@@ -1025,7 +1030,7 @@ Procedure ZoomHandler()
 EndProcedure
 
 Procedure CanvasHandler()
-  Protected.i cursorx,cursory
+
   
   Select EventType()
       
@@ -1117,67 +1122,50 @@ Procedure CanvasHandler()
       
     Case #PB_EventType_MouseMove
       
-      If IsImage(imgLayers(zoomlevel)) And IsImage(imgBackgrounds(zoomlevel))
-        cursorx = GetGadgetAttribute(canvas, #PB_Canvas_MouseX)
-        cursory = GetGadgetAttribute(canvas, #PB_Canvas_MouseY)        
-        If IsImage(ImageID(imgMagnifier)): FreeImage(ImageID(imgMagnifier)): EndIf
-        If  cursorx-12 >= 0 And cursory-12 >= 0 
-          If modusMagnifier = #True
-            imgMagnifier = GrabImage(imgOutput, #PB_Any, cursorx-12, cursory-12, 24,24)
-          Else         
-            imgMagnifier = GrabImage(imgBackgrounds(0), #PB_Any, cursorx-12, cursory-12, 24,24)     
-          EndIf
-          
-          ResizeImage(imgMagnifier, ImageWidth(imgMagnifier)*8,ImageHeight(imgMagnifier)*8)
-          If StartDrawing(ImageOutput(imgMagnifier))
-            Circle(100,100,2,#Red )
-            StopDrawing()
-          EndIf          
-          SetGadgetState(gadget_Magnifier, ImageID(imgMagnifier))
-        EndIf
-        
-        If Not moveinprogress And cursorx<width_viewport And cursory<height_viewport
-          StartDrawing(ImageOutput(imgLayers(zoomlevel)))
-          on1=0 : on2=0 : on3=0 : on4=0
-          Select Point(cursorx, cursory)        
-            Case RGB(250,0,0)
-              on1=1 
-            Case RGB(248,0,0)
-              on2=1
-            Case RGB(246,0,0)
-              on3=1
-            Case RGB(244,0,0)
-              on4=1
-            Default
-              on1=0 : on2=0 : on3=0 : on4=0
-          EndSelect
-          StopDrawing()
-        EndIf
-        
-        If GetGadgetAttribute(EventGadget(),#PB_Canvas_Buttons) & #PB_Canvas_LeftButton
-          If curveactive
-            moveinprogress=1
-            If on1
-              startpoint\x=cursorx : startpoint\y=cursory
-              oldstartpoint=startpoint
-            ElseIf on2
-              firstpoint\x=cursorx : firstpoint\y=cursory
-              oldfirstpoint=firstpoint
-            ElseIf on3
-              secondpoint\x=cursorx : secondpoint\y=cursory
-              oldsecondpoint=secondpoint
-            ElseIf on4
-              endpoint\x=cursorx : endpoint\y=cursory
-              oldendpoint=endpoint
-            EndIf
-            RedrawCurves()
-          EndIf
-        Else
-          moveinprogress=0
-        EndIf
+      UpdateMagnefier()
+      
+      If Not moveinprogress And cursorx<width_viewport And cursory<height_viewport
+        StartDrawing(ImageOutput(imgLayers(zoomlevel)))
+        on1=0 : on2=0 : on3=0 : on4=0
+        Select Point(cursorx, cursory)        
+          Case RGB(250,0,0)
+            on1=1 
+          Case RGB(248,0,0)
+            on2=1
+          Case RGB(246,0,0)
+            on3=1
+          Case RGB(244,0,0)
+            on4=1
+          Default
+            on1=0 : on2=0 : on3=0 : on4=0
+        EndSelect
+        StopDrawing()
       EndIf
-  EndSelect
-  
+      
+      If GetGadgetAttribute(EventGadget(),#PB_Canvas_Buttons) & #PB_Canvas_LeftButton
+        If curveactive
+          moveinprogress=1
+          If on1
+            startpoint\x=cursorx : startpoint\y=cursory
+            oldstartpoint=startpoint
+          ElseIf on2
+            firstpoint\x=cursorx : firstpoint\y=cursory
+            oldfirstpoint=firstpoint
+          ElseIf on3
+            secondpoint\x=cursorx : secondpoint\y=cursory
+            oldsecondpoint=secondpoint
+          ElseIf on4
+            endpoint\x=cursorx : endpoint\y=cursory
+            oldendpoint=endpoint
+          EndIf
+          RedrawCurves()
+        EndIf
+      Else
+        moveinprogress=0
+      EndIf
+
+EndSelect
+
 EndProcedure
 
 Procedure NewImageButtonHandler()
@@ -1287,11 +1275,35 @@ Procedure UpdateCanvas()
   SetGadgetAttribute(canvas, #PB_Canvas_Image, ImageID(imgOutput))
 EndProcedure
 
+Procedure UpdateMagnefier()
+  If IsImage(imgLayers(zoomlevel)) And IsImage(imgBackgrounds(zoomlevel))
+    cursorx = GetGadgetAttribute(canvas, #PB_Canvas_MouseX)
+    cursory = GetGadgetAttribute(canvas, #PB_Canvas_MouseY)        
+    If IsImage(ImageID(imgMagnifier)): FreeImage(ImageID(imgMagnifier)): EndIf
+    If  cursorx-12 >= 0 And cursory-12 >= 0 
+      If modusMagnifier = #True
+        imgMagnifier = GrabImage(imgOutput, #PB_Any, cursorx-12, cursory-12, 24,24)
+      Else         
+        imgMagnifier = GrabImage(imgBackgrounds(0), #PB_Any, cursorx-12, cursory-12, 24,24)     
+      EndIf
+      
+      ResizeImage(imgMagnifier, ImageWidth(imgMagnifier)*8,ImageHeight(imgMagnifier)*8)
+      If StartDrawing(ImageOutput(imgMagnifier))
+        Circle(100,100,2,#Red )
+        StopDrawing()
+      EndIf          
+      SetGadgetState(gadget_Magnifier, ImageID(imgMagnifier))
+    EndIf
+  EndIf
+  
+  
+EndProcedure
+
 
 ; IDE Options = PureBasic 6.03 beta 1 LTS (Windows - x64)
-; CursorPosition = 1127
-; FirstLine = 1104
-; Folding = -----
+; CursorPosition = 296
+; FirstLine = 254
+; Folding = ------
 ; EnableXP
 ; DPIAware
 ; DisableDebugger
