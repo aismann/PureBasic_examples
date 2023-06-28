@@ -11,5 +11,4 @@ Curved Designer 1.2
 [Design]
  - UI 'compacted'
  
- 
-  
+![image](https://github.com/aismann/PureBasic_examples/blob/main/CurveDesigner.png)
