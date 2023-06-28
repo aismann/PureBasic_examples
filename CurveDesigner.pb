@@ -1123,9 +1123,9 @@ Procedure CanvasHandler()
         If IsImage(ImageID(imgMagnifier)): FreeImage(ImageID(imgMagnifier)): EndIf
         If  cursorx-12 >= 0 And cursory-12 >= 0 
           If modusMagnifier = #True
-            imgMagnifier = GrabImage(imgOutput, #PB_Any, cursorx-12, cursory-12, 25,25)
+            imgMagnifier = GrabImage(imgOutput, #PB_Any, cursorx-12, cursory-12, 24,24)
           Else         
-            imgMagnifier = GrabImage(imgBackgrounds(0), #PB_Any, cursorx-12, cursory-12, 25,25)     
+            imgMagnifier = GrabImage(imgBackgrounds(0), #PB_Any, cursorx-12, cursory-12, 24,24)     
           EndIf
           
           ResizeImage(imgMagnifier, ImageWidth(imgMagnifier)*8,ImageHeight(imgMagnifier)*8)
@@ -1289,7 +1289,8 @@ EndProcedure
 
 
 ; IDE Options = PureBasic 6.03 beta 1 LTS (Windows - x64)
-; CursorPosition = 7
+; CursorPosition = 1127
+; FirstLine = 1104
 ; Folding = -----
 ; EnableXP
 ; DPIAware
