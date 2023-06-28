@@ -1,4 +1,6 @@
 ### Vector Curve Designer 1.2
+Original source: https://www.purebasic.fr/english/viewtopic.php?p=554379#p554379
+
 [FEATURES] 
  - Add a magnifier
  - [Space]  Enable/Disable the red 4 circles (for a better view)
