@@ -1264,10 +1264,11 @@ Procedure CreateCursor()
 EndProcedure
 
 Procedure UpdateCanvas()
-  If IsImage(imgOutput)
-    FreeImage(imgOutput)
-  EndIf
-  imgOutput = CopyImage(imgBackgrounds(zoomlevel),#PB_Any)
+;   If IsImage(imgOutput)
+;     FreeImage(imgOutput)
+;   EndIf
+;   imgOutput = CopyImage(imgBackgrounds(zoomlevel),#PB_Any)
+  CopyImage(imgBackgrounds(zoomlevel),imgOutput)
   StartVectorDrawing(ImageVectorOutput(imgOutput))
   MovePathCursor(0,0)
   DrawVectorImage(ImageID(imgLayers(zoomlevel)))
@@ -1287,7 +1288,7 @@ Procedure UpdateMagnefier()
         imgMagnifier = GrabImage(imgBackgrounds(0), #PB_Any, cursorx-12, cursory-12, 24,24)     
       EndIf
       
-      ResizeImage(imgMagnifier, ImageWidth(imgMagnifier)*8,ImageHeight(imgMagnifier)*8)
+      ResizeImage(imgMagnifier, ImageWidth(imgMagnifier)*8,ImageHeight(imgMagnifier)*8, #PB_Image_Raw)
       If StartDrawing(ImageOutput(imgMagnifier))
         Circle(100,100,2,#Red )
         StopDrawing()
@@ -1301,8 +1302,8 @@ EndProcedure
 
 
 ; IDE Options = PureBasic 6.03 beta 1 LTS (Windows - x64)
-; CursorPosition = 296
-; FirstLine = 254
+; CursorPosition = 1290
+; FirstLine = 1244
 ; Folding = ------
 ; EnableXP
 ; DPIAware
