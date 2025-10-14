@@ -10,8 +10,11 @@ Original source: https://www.purebasic.fr/english/viewtopic.php?p=554379#p554379
 [Design]
  - UI 'compacted'
  
-![image](https://github.com/aismann/PureBasic_examples/blob/main/CurveDesigner.png)
+![image](https://github.com/aismann/PureBasic_examples/blob/main/CurveDesigner/CurveDesigner.png?raw=true)
 
 
 ### PureMondrian
 https://github.com/jacdelad/PureMondrian/
+
+### Puzzle Of Mystralia
+https://www.purebasic.fr/english/viewtopic.php?t=81167
