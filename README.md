@@ -12,11 +12,14 @@ Original source: https://www.purebasic.fr/english/viewtopic.php?p=554379#p554379
  
 ![image](https://github.com/aismann/PureBasic_examples/blob/main/CurveDesigner/CurveDesigner.png?raw=true)
 
-### PureMondrian
-https://github.com/jacdelad/PureMondrian/
-
-### Puzzle Of Mystralia
+### Puzzle Of Mystralia  (C++ port)
 https://www.purebasic.fr/english/viewtopic.php?t=81167
 
 ### Waponez III (no data)
 Orginal 'Pure Basic Waponez II' source code : "PureBasic\Examples\Sources - Advanced\Waponez II"
+
+
+## Only links:
+
+### PureMondrian
+https://github.com/jacdelad/PureMondrian/
