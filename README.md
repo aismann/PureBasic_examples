@@ -13,7 +13,7 @@ Original source: https://www.purebasic.fr/english/viewtopic.php?p=554379#p554379
 ![image](https://github.com/aismann/PureBasic_examples/blob/main/CurveDesigner/CurveDesigner.png?raw=true)
 
 ### Puzzle Of Mystralia  (C++ port)
-https://www.purebasic.fr/english/viewtopic.php?t=81167
+Orginal 'Pure Basic' source code: http://puzzle.chez.com/   (V1.2c - SPH(2024))
 
 ### Waponez III (no data)
 Orginal 'Pure Basic Waponez II' source code : "PureBasic\Examples\Sources - Advanced\Waponez II"
