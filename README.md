@@ -17,7 +17,8 @@ Orginal 'Pure Basic' source code: http://puzzle.chez.com/   (V1.2c - SPH(2024))
 
 ### Waponez III (no data)
 Orginal 'Pure Basic Waponez II' source code : "PureBasic\Examples\Sources - Advanced\Waponez II"
-<img width="600" height="800" alt="image" src="https://github.com/user-attachments/assets/c152e007-bb87-4f0f-9bce-4ede8a46dee1" />
+<img width="802" height="1027" alt="image" src="https://github.com/user-attachments/assets/875c35d8-e043-4cae-ae2d-d7ddfd8526ef" />
+
 
 
 
